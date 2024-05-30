@@ -1,4 +1,5 @@
 import { SignedOut, SignedIn } from '@clerk/nextjs';
+import Image from 'next/image';
 import { getMyImages } from '~/server/queries';
 
 //Tell next not to cache because database will change
@@ -10,7 +11,7 @@ async function Images() {
         <div className="flex flex-wrap gap-4">
             {images.map((image, index) => (
                 <div key={index + '-' + image.id} className="w-48 flex flex-col">
-                    <img src={image.url} alt="image" />
+                    <img src={image.url} alt={image.name} style={{ objectFit: "contain" }} />
                     <div>{image.name}</div>
                 </div>
             ))
@@ -18,7 +19,6 @@ async function Images() {
         </div>
     )
 }
-
 
 export default async function HomePage() {
     return (
