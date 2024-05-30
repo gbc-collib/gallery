@@ -7,15 +7,15 @@ export const dynamic = "force-dynamic";
 async function Images() {
     const images = await db.query.images.findMany({ orderBy: (model, { desc }) => desc(model.id), });
     return (
-    <div className="flex flex-wrap gap-4">
-        {[...images, ...images, ...images].map((image) => (
-            <div key={image.id} className="w-48 flex flex-col">
-                <img src={image.url} alt="image" />
-                <div>{image.name}</div>
-            </div>
-        ))
-        }
-    </div>
+        <div className="flex flex-wrap gap-4">
+            {images.map((image, index) => (
+                <div key={index + '-' + image.id} className="w-48 flex flex-col">
+                    <img src={image.url} alt="image" />
+                    <div>{image.name}</div>
+                </div>
+            ))
+            }
+        </div>
     )
 }
 
